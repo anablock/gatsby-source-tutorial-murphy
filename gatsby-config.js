@@ -39,5 +39,12 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+        resolve: `gatsby-source-fixer`,
+        options: {
+            access_key: process.env.FIXER_API_KEY,
+            base: `EUR`,
+        }
+    }
   ],
 }
