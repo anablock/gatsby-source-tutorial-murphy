@@ -1,6 +1,7 @@
 const fetch = require("node-fetch")
 const queryString = require("query-string")
 
+
 // Gatsby expects exported sourceNodes to be a function with the
 // signature (apiOptions, pluginOptions)
 // https://www.gatsbyjs.org/docs/node-apis/#sourceNodes
@@ -63,7 +64,13 @@ exports.sourceNodes = async (
     }
     const apiOptions = queryString.stringify(configOptions)
     // Helper function that processes a fixer to match Gatsby's node structure
-    const apiUrl = `http://data.fixer.io/api/latest?{apiOptions}`
+    //const apiUrl = `http://data.fixer.io/api/latest?${apiOptions}`
+    const accessKey = "nUKJHiAzbazv89V6mZ8goLDWboVqRQq5";
+    
+    // const apiUrl = `http://data.fixer.io/api/latest?access_key=${accessKey}&${apiOptions}`
+    const apiUrl = `https://api.apilayer.com/fixer/latest?access_key=nUKJHiAzbazv89V6mZ8goLDWboVqRQq5&${apiOptions}`
+    // https://api.apilayer.com/fixer/latest?base=USD&symbols=EUR,GBP
+
     // Convert the options object into a query string
     const fetchResponse = await fetch(apiUrl)
     const rates = await fetchResponse.json()
@@ -78,5 +85,5 @@ exports.sourceNodes = async (
     const nodeData = processFixer(configOptions.base, rates)
     createNode(nodeData)
     // Gatsby expects sourceNodes to return a promise
-    return
+    return Promise.resolve();
 }

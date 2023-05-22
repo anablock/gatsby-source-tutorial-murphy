@@ -40,11 +40,11 @@ module.exports = {
       },
     },
     {
-        resolve: `gatsby-source-fixer`,
-        options: {
-            access_key: process.env.FIXER_API_KEY,
-            base: `EUR`,
-        }
+      resolve: `gatsby-source-fixer`,
+      options: {
+          access_key: process.env.FIXER_API_KEY,
+          base: `EUR`,
+      }
     }
   ],
 }
